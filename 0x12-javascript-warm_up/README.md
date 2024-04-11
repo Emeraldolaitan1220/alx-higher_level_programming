@@ -1,0 +1,1 @@
+This is baisc javascript and foundation of javascript
