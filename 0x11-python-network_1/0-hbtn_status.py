@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 import urllib.request
-"""fetches the value of the X-Request-Id variable"""#!/usr/bin/python3
-import urllib.request
-
+"""fetches the value of the X-Request-Id variable"""
 def fetch_url():
     with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as response:
         html = response.read()
