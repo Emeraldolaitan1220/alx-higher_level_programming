@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-import requests
+"""displays the value of the X-Request-Id variable"""
 import sys
+import requests
 
-"""fetches the url passed as argument"""
-def fetch_url(url):
-    response = requests.get(url)
-    print(response.headers.get('X-Request-Id'))
-"""fetches the url passed as argument"""
+
 if __name__ == "__main__":
     url = sys.argv[1]
-    fetch_url(url)
+    response = requests.get(url)
+    value = response.headers.get("X-Request-Id")
+    print(value)

@@ -1,16 +1,14 @@
 #!/usr/bin/python3
-import requests
+"""status code is greater than or equal to 400 prints Error code:"""
 import sys
+import requests
 
-"""displays the body of the response (decoded in utf-8) followed by http status code
-"""
-def fetch_url(url):
-    response = requests.get(url)
-    if response.status_code >= 400:
-        print("Error code: {}".format(response.status_code))
-    else:
-        print(response.text)
-"""fetches the url passed as argument"""
+
 if __name__ == "__main__":
     url = sys.argv[1]
-    fetch_url(url)
+
+    r = requests.get(url)
+    if r.status_code >= 400:
+        print("Error code: {}".format(r.status_code))
+    else:
+        print(r.text)

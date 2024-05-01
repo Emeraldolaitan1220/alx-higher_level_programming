@@ -1,17 +1,15 @@
 #!/usr/bin/python3
-import urllib.request
-import urllib.error
-import sys
+"""A script that displays the body of the response
+   (decoded in utf-8).
+"""
 
-"""fetches the url passed as argument"""
-def fetch_url(url):
-    try:
-        with urllib.request.urlopen(url) as response:
-            print(response.read().decode('utf-8'))
-    except urllib.error.HTTPError as e:
-        print("Error code: {}".format(e.code))
 
-"""fetches the url passed as argument"""
 if __name__ == "__main__":
-    url = sys.argv[1]
-    fetch_url(url)
+    import sys
+    from urllib import request, error
+
+    try:
+        with request.urlopen(sys.argv[1]) as res:
+            print(res.read().decode('UTF-8'))
+    except error.HTTPError as er:
+        print('Error code:', er.code)

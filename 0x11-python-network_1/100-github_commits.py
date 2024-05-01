@@ -1,19 +1,22 @@
 #!/usr/bin/python3
-import requests
+"""list 10 commits (from the most recent to oldest) of a repository"""
 import sys
+import requests
 
 
-""" request to the GitHub API to get the last 10 commits of a repository """
-def list_commits(repo_name, owner_name):
-    url = f"https://api.github.com/repos/{owner_name}/{repo_name}/commits"
-    response = requests.get(url)
-    commits = response.json()
-
-    for commit in commits[:10]:
-        print(f"{commit['sha']}: {commit['commit']['author']['name']}")
-
-""" main function """
 if __name__ == "__main__":
-    repo_name = sys.argv[1]
-    owner_name = sys.argv[2]
-    list_commits(repo_name, owner_name)
+    try:
+        repo_name = sys.argv[1]
+        username = sys.argv[2]
+        commmits_url = "https://api.github.com/repos/{}/{}/commits" \
+            .format(username, repo_name)
+        response = requests.get(commmits_url)
+        json_obj = response.json()
+        for i, obj in enumerate(json_obj):
+            if i == 10:
+                break
+            if type(obj) is dict:
+                name = obj.get('commit').get('author').get('name')
+                print("{}: {}".format(obj.get('sha'), name))
+    except ValueError as invalid_json:
+        pass
